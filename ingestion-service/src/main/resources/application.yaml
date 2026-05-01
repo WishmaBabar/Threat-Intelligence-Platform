@@ -1,0 +1,12 @@
+server:
+  port: 8083
+spring:
+  kafka:
+    bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+external:
+  threat:
+    api:
+      url: http://mock-threat-api:8081/api/threats

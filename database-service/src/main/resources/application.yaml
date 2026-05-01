@@ -1,0 +1,24 @@
+server:
+  port: 8088
+spring:
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: db-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+        spring.json.use.type.headers: false
+        spring.json.value.default.type: com.ccp.databaseservice.dto.EnrichedIoc
+      auto-offset-reset: earliest
+  datasource:
+    url: jdbc:mysql://mysql:3306/threat_intel?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    application:
+      name: database-service

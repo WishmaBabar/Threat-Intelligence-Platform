@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: mock-threat-api
+server:
+  port: 8081

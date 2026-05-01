@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: ranking-service
+server:
+  port: 8087
+external:
+  ranking:
+    api:
+      url: http://mock-ranking-api:8082/api/rank
