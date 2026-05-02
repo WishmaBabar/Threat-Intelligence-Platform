@@ -74,3 +74,17 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Notes
 
 - The threat feed is intentionally simulated for reproducible lab deployment, representing AbuseIPDB and AlienVault sources.
+
+## Contribution Statement
+Wishma Babar  
+➢ Registration: B23F0001SE030  
+➢ Role: Team Lead & Developer 
+- Responsibility:  Ingestion Service, Kafka Producer Service, Mock Services, 
+Kafka/Zookeeper configuration, Docker Compose setup, Architecture diagrams, 
+Next.js Dashboard (charts, filters, statistics), Testing and validation
+
+Hafra Zaheer  
+➢ Registration: B23F0001SE032  
+➢ Role: Documentation Lead
+- Responsibility:  Processing Service, Ranking Service, Database Service, MySQL 
+schema design, REST API endpoints, Extraction Service, Data Flow Diagram.
