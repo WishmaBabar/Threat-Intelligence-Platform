@@ -58,6 +58,7 @@ Open the dashboard at `http://localhost:3000`.
 
 ## Mode Summary
 
+
 - `mock`: use only simulated data
 - `real`: use only AbuseIPDB/AlienVault real APIs
 - `hybrid`: use real APIs with mock fallback
@@ -71,3 +72,21 @@ Open the dashboard at `http://localhost:3000`.
 ## More configuration details
 
 For full setup and API key instructions, see `docs/THREAT_API_INTEGRATION.md`.
+
+- The threat feed is intentionally simulated for reproducible lab deployment, representing AbuseIPDB and AlienVault sources.
+
+## Contribution Statement
+Wishma Babar  
+➢ Registration: B23F0001SE030  
+➢ Role: Team Lead & Developer 
+- Responsibility:  Ingestion Service, Kafka Producer Service, Mock Services, 
+Kafka/Zookeeper configuration, Docker Compose setup, Architecture diagrams, 
+Next.js Dashboard (charts, filters, statistics), Testing and validation
+
+Hafra Zaheer  
+➢ Registration: B23F0001SE032  
+➢ Role: Documentation Lead
+- Responsibility:  Processing Service, Ranking Service, Database Service, MySQL 
+schema design, REST API endpoints, Extraction Service, Data Flow Diagram.
+
+
