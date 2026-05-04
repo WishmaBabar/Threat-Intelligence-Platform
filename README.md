@@ -48,45 +48,13 @@ npm run dev
 
 Open the dashboard at `http://localhost:3000`.
 
-## API Endpoints for Testing
+## REST APIs
 
-- `http://localhost:8081/api/threats` — threat feed input
-- `http://localhost:8081/api/status` — threat source status
-- `http://localhost:8087/api/score` — ranking service endpoint
-- `http://localhost:8088/api/iocs` — saved IOCs
-- `http://localhost:8088/api/analytics/summary` — analytics summary
+- Database Service: `http://localhost:8088/api/iocs`
+- Analytics Summary: `http://localhost:8088/api/analytics/summary`
+- Mock Threat API: `http://localhost:8081/api/threats`
+- Ranking Service: `http://localhost:8087/api/score`
 
-## Mode Summary
-
-
-- `mock`: use only simulated data
-- `real`: use only AbuseIPDB/AlienVault real APIs
-- `hybrid`: use real APIs with mock fallback
-
-## Important Notes
-
-- `.env.example` is kept as a configuration template and should remain in the repository.
-- `.env` holds your local API keys and is ignored by Git.
-- The system behavior stays the same in all modes; only the threat source changes.
-
-## More configuration details
-
-For full setup and API key instructions, see `docs/THREAT_API_INTEGRATION.md`.
+## Notes
 
 - The threat feed is intentionally simulated for reproducible lab deployment, representing AbuseIPDB and AlienVault sources.
-
-## Contribution Statement
-Wishma Babar  
-➢ Registration: B23F0001SE030  
-➢ Role: Team Lead & Developer 
-- Responsibility:  Ingestion Service, Kafka Producer Service, Mock Services, 
-Kafka/Zookeeper configuration, Docker Compose setup, Architecture diagrams, 
-Next.js Dashboard (charts, filters, statistics), Testing and validation
-
-Hafra Zaheer  
-➢ Registration: B23F0001SE032  
-➢ Role: Documentation Lead
-- Responsibility:  Processing Service, Ranking Service, Database Service, MySQL 
-schema design, REST API endpoints, Extraction Service, Data Flow Diagram.
-
-
