@@ -1,76 +1,73 @@
 # Development of Security System using Microservices
 
-This project implements a distributed threat intelligence platform for ingesting, extracting, ranking, and storing Indicators of Compromise (IOCs).
+A microservice-based threat intelligence platform that ingests raw threat text, extracts IP/domain IOCs, scores them, and stores results in MySQL.
 
-## CCP Compliance Summary
+## Quick Start
 
-- Implements a microservices architecture with event-driven Kafka communication and REST APIs.
-- Uses MySQL for persistent IOC storage.
-- Simulates external threat intelligence sources for AbuseIPDB and AlienVault through the mock threat API.
-- Processes raw threat telemetry, extracts IP and domain IOCs, validates entries, enriches severity scores, and stores results.
-- Provides REST query and analytics endpoints plus a responsive dashboard.
+### 1. Prepare environment file
 
-## Architecture
+Copy the example file:
 
-- **Ingestion Service**: fetches raw threat records from the mock threat API and publishes raw JSON to Kafka.
-- **Extraction Service**: consumes raw data, extracts IPs and domains, then forwards IOC payloads to the Kafka producer service.
-- **Kafka Producer Service**: publishes IOC records to the `iocs` Kafka topic.
-- **Processing Service**: consumes IOCs, validates values, calls the ranking service, and publishes enriched IOCs to Kafka.
-- **Ranking Service**: forwards IOC scoring requests to the external ranking API and returns severity scores.
-- **Database Service**: consumes enriched IOCs, persists them in MySQL, and exposes query/analytics REST endpoints.
-- **Mock Threat API**: simulates external intelligence sources and provides sample threat records.
-- **Mock Ranking API**: simulates an external scoring service used by the ranking pipeline.
-- **Analytics Dashboard**: responsive web UI for IOC insights and severity analytics.
-
-## System Workflow
-
-1. Ingestion service fetches threat data from the mock threat API.
-2. Extraction service parses JSON and extracts IP/domain IOCs.
-3. Kafka streams IOC payloads between services.
-4. Processing service validates and filters the IOCs.
-5. Ranking service sends IOC data to the external ranking API.
-6. Severity scores are returned and attached to each IOC.
-7. Database service stores enriched records in MySQL.
-8. Analytics dashboard and REST endpoints provide query and reporting capabilities.
-
-## Technologies
-
-- Java Spring Boot
-- Apache Kafka
-- MySQL
-- Docker Compose
-- Next.js, TailwindCSS, and Recharts
-
-## Running the Project
-
-### Prerequisites
-
-- Docker & Docker Compose
-- Node.js (for the dashboard)
-
-### Start services
-
-```bash
-docker compose up --build
+```powershell
+copy .env.example .env
 ```
 
-### Start dashboard
+Then edit `.env` and set:
 
-```bash
+```env
+THREAT_SOURCE_MODE=hybrid
+ABUSEIPDB_API_KEY=your_abuseipdb_key_here
+ALIENVAULT_API_KEY=your_alienvault_key_here
+```
+
+If you want mock data only:
+
+```env
+THREAT_SOURCE_MODE=mock
+```
+
+If you want real data only:
+
+```env
+THREAT_SOURCE_MODE=real
+```
+
+### 2. Start the services
+
+```powershell
+docker compose --env-file .env up --build
+```
+
+### 3. Start the dashboard
+
+```powershell
 cd analytics-dashboard
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open the dashboard at `http://localhost:3000`.
 
-## REST APIs
+## API Endpoints for Testing
 
-- Database Service: `http://localhost:8088/api/iocs`
-- Analytics Summary: `http://localhost:8088/api/analytics/summary`
-- Mock Threat API: `http://localhost:8081/api/threats`
-- Ranking Service: `http://localhost:8087/api/score`
+- `http://localhost:8081/api/threats` — threat feed input
+- `http://localhost:8081/api/status` — threat source status
+- `http://localhost:8087/api/score` — ranking service endpoint
+- `http://localhost:8088/api/iocs` — saved IOCs
+- `http://localhost:8088/api/analytics/summary` — analytics summary
 
-## Notes
+## Mode Summary
 
-- The threat feed is intentionally simulated for reproducible lab deployment, representing AbuseIPDB and AlienVault sources.
+- `mock`: use only simulated data
+- `real`: use only AbuseIPDB/AlienVault real APIs
+- `hybrid`: use real APIs with mock fallback
+
+## Important Notes
+
+- `.env.example` is kept as a configuration template and should remain in the repository.
+- `.env` holds your local API keys and is ignored by Git.
+- The system behavior stays the same in all modes; only the threat source changes.
+
+## More configuration details
+
+For full setup and API key instructions, see `docs/THREAT_API_INTEGRATION.md`.

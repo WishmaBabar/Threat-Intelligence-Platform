@@ -32,6 +32,20 @@ services:
     build: ./mock-threat-api
     ports:
       - "8081:8081"
+    environment:
+      # Set THREAT_SOURCE_MODE to one of: mock, real, hybrid
+      # mock (default) = Use simulated threat data
+      # real = Fetch from real AbuseIPDB and AlienVault APIs (requires API keys below)
+      # hybrid = Try real APIs, fallback to simulated data if unavailable
+      THREAT_SOURCE_MODE: ${THREAT_SOURCE_MODE:-mock}
+      
+      # AbuseIPDB API Configuration
+      # Get your FREE API key from: https://www.abuseipdb.com/register
+      ABUSEIPDB_API_KEY: ${ABUSEIPDB_API_KEY:-}
+      
+      # AlienVault OTX API Configuration
+      # Get your FREE API key from: https://otx.alienvault.com/
+      ALIENVAULT_API_KEY: ${ALIENVAULT_API_KEY:-}
 
   mock-ranking-api:
     build: ./mock-ranking-api

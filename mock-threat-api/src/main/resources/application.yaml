@@ -3,3 +3,20 @@ spring:
     name: mock-threat-api
 server:
   port: 8081
+
+# Threat intelligence source configuration
+threat:
+  source:
+    # Options: "mock" (default), "real" (requires API keys), "hybrid" (real APIs with mock fallback)
+    mode: ${THREAT_SOURCE_MODE:mock}
+
+# External Threat Intelligence APIs
+abuseipdb:
+  api:
+    # Get your API key from https://www.abuseipdb.com/register
+    key: ${ABUSEIPDB_API_KEY:}
+
+alienvault:
+  api:
+    # Get your API key from https://otx.alienvault.com/
+    key: ${ALIENVAULT_API_KEY:}
